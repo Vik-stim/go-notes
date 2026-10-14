@@ -7,6 +7,10 @@ import (
 	"strconv"
 )
 
+func combineNotes(oldText, newText string) string {
+	return oldText + "\n" + newText
+}
+
 func addNote(scanner *bufio.Scanner) {
 	fmt.Print("Напиши текст для заметки: ")
 	scanner.Scan() // больше не создаём новый, а пользуемся переданным
@@ -18,7 +22,7 @@ func addNote(scanner *bufio.Scanner) {
 	}
 	oldText := string(oldData)
 
-	fullText := oldText + "\n" + text
+	fullText := combineNotes(oldText, text)
 	err = os.WriteFile("notes.txt", []byte(fullText), 0644)
 	if err != nil {
 		fmt.Println("Ошибка записи:", err)
